@@ -1,0 +1,16 @@
+name: Workflow To Display Environment Variables & Secrets
+on:
+  workflow_call:
+
+jobs:
+  display_variables:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-python@v2
+      with:
+        python-version: 3.11
+    
+    - name: "Display Variables"
+      run: |
+        python -c"import os; env=os.environ.get('MY_ENVIRONMENT', '--not-available--'); sec=os.environ.get('MY_SECRET', '--not-available--'); print(f'MY_ENVIRONMENT={env}\nMY_SECRET={sec}');"
